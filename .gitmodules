@@ -10,3 +10,9 @@
 [submodule "modules/pyblish-nuke"]
 	path = modules/pyblish-nuke
 	url = https://github.com/pyblish/pyblish-nuke.git
+[submodule "modules/pyblish-houdini"]
+	path = modules/pyblish-houdini
+	url = https://github.com/pyblish/pyblish-houdini.git
+[submodule "modules/pyblish-rpc"]
+	path = modules/pyblish-rpc
+	url = https://github.com/pyblish/pyblish-rpc.git
