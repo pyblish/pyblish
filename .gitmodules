@@ -4,9 +4,6 @@
 [submodule "modules/pyblish-qml"]
 	path = modules/pyblish-qml
 	url = https://github.com/pyblish/pyblish-qml.git
-[submodule "modules/pyblish-endpoint"]
-	path = modules/pyblish-endpoint
-	url = https://github.com/pyblish/pyblish-endpoint.git
 [submodule "modules/pyblish-maya"]
 	path = modules/pyblish-maya
 	url = https://github.com/pyblish/pyblish-maya.git
