@@ -16,3 +16,6 @@
 [submodule "modules/pyblish-rpc"]
 	path = modules/pyblish-rpc
 	url = https://github.com/pyblish/pyblish-rpc.git
+[submodule "modules/pyblish-integration"]
+	path = modules/pyblish-integration
+	url = https://github.com/pyblish/pyblish-integration.git
