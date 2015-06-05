@@ -10,7 +10,7 @@ def wrap_module(module):
 
     """
 
-    library_dir = os.path.join(__file__, "..", "..", "modules", module)
+    library_dir = os.path.join(__file__, "..", "..", "..", "modules", module)
     library_dir = os.path.realpath(library_dir)
 
     assert os.path.isdir(library_dir), library_dir
