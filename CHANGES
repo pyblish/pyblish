@@ -1,6 +1,14 @@
 pyblish-x Changelog
 =================
 
+Version 0.1.5
+-------------
+
+- Updated Pyblish
+- Updated Pyblish Maya to 1.1.0
+- Updated Pyblish Nuke to 1.1.0
+- Updated Pyblish Houdini to 0.2.0
+
 Version 0.1.4
 -------------
 
