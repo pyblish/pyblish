@@ -2,8 +2,4 @@ image:
 - mottosso/maya
 
 script:
-- |
-  if ! [ ${SYSTEM_IMAGE} == "mottosso/maya" ]; then
-    echo "Testing Maya integration.."
-    mayapy run_testsuite.py
-  fi
+- hpython run_testsuite.py
