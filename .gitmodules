@@ -22,3 +22,6 @@
 [submodule "modules/pyblish-standalone"]
 	path = modules/pyblish-standalone
 	url = https://github.com/pyblish/pyblish-standalone.git
+[submodule "modules/pyblish-hiero"]
+	path = modules/pyblish-hiero
+	url = https://github.com/pyblish/pyblish-hiero.git
