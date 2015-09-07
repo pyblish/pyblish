@@ -19,3 +19,6 @@
 [submodule "modules/pyblish-integration"]
 	path = modules/pyblish-integration
 	url = https://github.com/pyblish/pyblish-integration.git
+[submodule "modules/pyblish-standalone"]
+	path = modules/pyblish-standalone
+	url = https://github.com/pyblish/pyblish-standalone.git
