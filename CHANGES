@@ -4,6 +4,14 @@ pyblish-x Changelog
 Version 0.1.8
 -------------
 
+- Feature: Actions
+- Updated Pyblish to 1.2.1
+- Updated Pyblish QML to 0.3.2
+- Updated Pyblish RPC to 0.1.4
+
+Version 0.1.8
+-------------
+
 - Adding Pyblish Standalone
 - Adding Pyblish Hiero
 
