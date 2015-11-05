@@ -25,3 +25,6 @@
 [submodule "modules/pyblish-hiero"]
 	path = modules/pyblish-hiero
 	url = https://github.com/pyblish/pyblish-hiero.git
+[submodule "modules/pyblish-tray"]
+	path = modules/pyblish-tray
+	url = https://github.com/pyblish/pyblish-tray.git

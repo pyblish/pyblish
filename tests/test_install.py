@@ -10,3 +10,4 @@ def test_install():
     __import__("pyblish_qml")
     __import__("pyblish_rpc")
     __import__("pyblish_integration")
+    __import__("pyblish_tray")
