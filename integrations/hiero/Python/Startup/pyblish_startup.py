@@ -1,7 +1,4 @@
-import sys
 import traceback
-
-import hiero
 
 try:
     __import__("pyblish_hiero")
@@ -12,8 +9,6 @@ except ImportError as e:
     print("pyblish: Could not load integration: %s " % e)
 
 else:
-
-    import pyblish_hiero.lib
-
     # Setup integration
+    import pyblish_hiero.lib
     pyblish_hiero.lib.setup()
