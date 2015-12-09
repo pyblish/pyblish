@@ -1,6 +1,13 @@
 pyblish-x Changelog
 =================
 
+Version 0.2.2
+-------------
+
+- Updated pyblish to 1.2.2
+- Updated pyblish-maya to 1.2.0
+- Updated pyblish-integration
+
 Version 0.2.0
 -------------
 
