@@ -1,6 +1,3 @@
-[submodule "modules/pyblish"]
-	path = modules/pyblish
-	url = https://github.com/pyblish/pyblish.git
 [submodule "modules/pyblish-qml"]
 	path = modules/pyblish-qml
 	url = https://github.com/pyblish/pyblish-qml.git
@@ -28,3 +25,6 @@
 [submodule "modules/pyblish-tray"]
 	path = modules/pyblish-tray
 	url = https://github.com/pyblish/pyblish-tray.git
+[submodule "modules/pyblish-base"]
+	path = modules/pyblish-base
+	url = https://github.com/pyblish/pyblish-base
