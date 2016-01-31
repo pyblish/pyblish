@@ -1,16 +1,16 @@
-[![Code Health][landscape-image]][landscape-repo]
-[![Gitter][gitter-image]][chat]
+[![](https://img.shields.io/badge/goto-development%20project-yellowgreen.svg)](https://github.com/pyblish/pyblish-base) [![Gitter][gitter-image]][chat]
 
-[![vlcsnap-2015-07-03-17h02m03s138](https://cloud.githubusercontent.com/assets/2152766/8504730/69ac7ebc-21ce-11e5-8dbd-68571e7b702c.png)](https://www.youtube.com/watch?v=j5uUTW702-U)
+[![title](https://cloud.githubusercontent.com/assets/2152766/12704096/b74e8778-c84a-11e5-94f6-adc0c3c50447.png)](https://www.youtube.com/watch?v=j5uUTW702-U)
 
 Test-driven content creation for collaborative, creative projects.
 
+This repository is an aggregation of currently supported Pyblish projects. See the development project for more information on how you can get involved.
+
+- [Development project](https://github.com/pyblish/pyblish-base)
 - [Wiki](../../wiki)
 - [Learn by Example][example]
 
 [example]: http://forums.pyblish.com/t/learning-pyblish-by-example
 [chat]: https://gitter.im/pyblish/pyblish?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-[landscape-image]: https://landscape.io/github/pyblish/pyblish/master/landscape.png
-[landscape-repo]: https://landscape.io/github/pyblish/pyblish/master
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
