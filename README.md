@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/goto-development%20project-yellowgreen.svg)](https://github.com/pyblish/pyblish-base) [![Gitter][gitter-image]][chat]
+[![](https://img.shields.io/badge/goto-development%20project-yellowgreen.svg)](https://github.com/pyblish/pyblish-base) [![Gitter][gitter-image]](https://gitter.im/pyblish/pyblish)
 
 [![title](https://cloud.githubusercontent.com/assets/2152766/12704096/b74e8778-c84a-11e5-94f6-adc0c3c50447.png)](https://www.youtube.com/watch?v=j5uUTW702-U)
 
