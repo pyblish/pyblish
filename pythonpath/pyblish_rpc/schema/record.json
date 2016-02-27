@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+
+    "title": "Record",
+    "description": "An individual log message",
+
+    "type": "object",
+    "required": ["message"],
+
+    "properties": {
+        "message": {"type": "string"},
+        "msecs": {},
+        "args": {},
+        "name": {},
+        "thread": {},
+        "created": {},
+        "process": {},
+        "threadName": {},
+        "module": {},
+        "filename": {},
+        "levelno": {},
+        "processName": {},
+        "pathname": {},
+        "lineno": {},
+        "exc_text": {},
+        "exc_info": {},
+        "funcName": {},
+        "relativeCreated": {},
+        "levelname": {}
+    }
+}

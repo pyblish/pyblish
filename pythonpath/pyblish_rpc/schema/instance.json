@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+
+    "title": "Instance",
+    "type": "object",
+
+    "required": ["name", "data"],
+
+    "properties": {
+        "name": {
+            "description": "Name of instance",
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+
+            "properties": {
+                "family": {
+                    "description": "Family of instance",
+                    "type": "string"
+                },
+                "compatibleInstances": {
+                    "description": "Array of compatible plug-ins",
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            }
+        }
+    }
+}

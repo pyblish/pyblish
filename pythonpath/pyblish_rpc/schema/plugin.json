@@ -1,0 +1,83 @@
+{
+    "title": "Plugin",
+    "type": "object",
+
+    "required": [
+        "name",
+        "families",
+        "order",
+        "optional",
+        "type"
+    ],
+
+    "properties": {
+        "name": {
+            "description": "",
+            "type": "string"
+        },
+        "families": {
+            "type": "array",
+            "items": {"type": "string"}
+        },
+        "order": {
+            "type": "number"
+        },
+        "version": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {"type": "integer"}
+        },
+        "optional": {
+            "type": "boolean"
+        },
+        "doc": {
+            "type": ["string", "null"]
+        },
+        "hasRepair": {
+            "type": "boolean"
+        },
+        "hasCompatible": {
+            "type": "boolean"
+        },
+        "type": {
+            "type": "string"
+        },
+        "module": {
+            "type": "string"
+        },
+        "canRepairContext": {
+            "description": "Whether or not the plug-in has implemented Instance repair",
+            "type": "boolean"
+        },
+        "compatibleInstances": {
+            "description": "Array of compatible instances",
+            "type": "array",
+            "items": {"type": "string"}
+        },
+        "process": {
+            "description": "Processing method",
+            "type": "object",
+
+            "properties": {
+                "args": {
+                    "description": "Argument signature of process()",
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            }
+        },
+        "repair": {
+            "description": "Repair method",
+            "type": "object",
+
+            "properties": {
+                "args": {
+                    "description": "Argument signature of repair()",
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            }
+        }
+    }
+}

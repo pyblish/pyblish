@@ -1,0 +1,16 @@
+module Library
+
+singleton Theme 0.1 Theme.qml
+singleton Global 0.1 Global.qml
+
+ApplicationWindow 0.1 ApplicationWindow.qml
+AwesomeIcon 0.1 AwesomeIcon.qml
+AwesomeButton 0.1 AwesomeButton.qml
+Button 0.1 Button.qml
+Container 0.1 Container.qml
+H1 0.1 H1.qml
+HeadsUpDisplay 0.1 HeadsUpDisplay.qml
+Object 0.1 Object.qml
+Scrollbar 0.1 Scrollbar.qml
+Selection 0.1 Selection.qml
+TabBar 0.1 TabBar.qml

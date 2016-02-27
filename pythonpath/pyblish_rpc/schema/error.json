@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+
+    "title": "Error",
+    "description": "A Python exception",
+
+    "type": "object",
+    "required": ["message"],
+
+    "properties": {
+        "message": {
+            "description": "Message passed to exception",
+            "type": "string"
+        },
+        "line_number": {
+            "description": "Line at which exception occurred",
+            "type": "number"
+        },
+        "func": {
+            "description": "Name of function from which the exception was thrown",
+            "type": "string"
+        },
+        "fname": {
+            "description": "Name of file from which the exception was thrown",
+            "type": "string"
+        },
+        "exc": {
+            "description": "Message from extracted traceback (should be identical to `message`)",
+            "oneOf": [
+                {"type": "string"},
+                {"type": "null"}
+            ]
+        }
+    }
+}
