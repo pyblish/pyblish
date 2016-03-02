@@ -21,7 +21,7 @@ import logging
 import warnings
 
 # Local library
-from . import logic, plugin, lib
+from . import api, logic, plugin
 
 log = logging.getLogger("pyblish.util")
 
@@ -31,13 +31,13 @@ def publish(context=None, plugins=None, **kwargs):
 
     This function will process all available plugins of the
     currently running host, publishing anything picked up
-    during selection.
+    during collection.
 
     Arguments:
-        context (plugin.Context): Optional Context,
-            defaults to creating a new context
-        plugins (list): (Optional) Plug-ins to include,
-            defaults to discover()
+        context (Context, optional): Context, defaults to
+            creating a new context
+        plugins (list, optional): Plug-ins to include,
+            defaults to results of discover()
 
     Usage:
         >> context = plugin.Context()
@@ -46,18 +46,16 @@ def publish(context=None, plugins=None, **kwargs):
 
     """
 
-    # Must check against None, as the
-    # Context may come in empty.
-    if context is None:
-        context = plugin.Context()
-
-    if plugins is None:
-        plugins = plugin.discover()
+    # Must check against None, as objects be emptys
+    context = api.Context() if context is None else context
+    plugins = api.discover() if plugins is None else plugins
 
     # Do not consider inactive plug-ins
     plugins = list(p for p in plugins if p.active)
 
-    test = logic.registered_test()
+    test = api.registered_test()
+
+    # Keep track of state, so we can cancel on failed validation
     state = {
         "nextOrder": None,
         "ordersWithError": set()
@@ -92,47 +90,41 @@ def publish(context=None, plugins=None, **kwargs):
         if error is not None:
             print(error)
 
-    lib.emit("published", context=context)
+    api.emit("published", context=context)
 
     return context
 
 
 def collect(*args, **kwargs):
-    """Convenience function for selection"""
+    """Convenience function for collection"""
     context = _convenience(0.5, *args, **kwargs)
-    lib.emit("collected", context=context)
+    api.emit("collected", context=context)
     return context
 
 
 def validate(*args, **kwargs):
     """Convenience function for validation"""
     context = _convenience(1.5, *args, **kwargs)
-    lib.emit("validated", context=context)
+    api.emit("validated", context=context)
     return context
 
 
 def extract(*args, **kwargs):
     """Convenience function for extraction"""
     context = _convenience(2.5, *args, **kwargs)
-    lib.emit("extracted", context=context)
+    api.emit("extracted", context=context)
     return context
 
 
 def integrate(*args, **kwargs):
-    """Convenience function for conform"""
+    """Convenience function for integration"""
     context = _convenience(3.5, *args, **kwargs)
-    lib.emit("integrated", context=context)
+    api.emit("integrated", context=context)
     return context
 
 
-# Backwards compatibility
-select = collect
-conform = integrate
-run = publish  # Alias
-
-
 def _convenience(order, *args, **kwargs):
-    plugins = [p for p in plugin.discover()
+    plugins = [p for p in api.discover()
                if p.order < order]
 
     args = list(args)
@@ -144,6 +136,11 @@ def _convenience(order, *args, **kwargs):
 
 
 # Backwards compatibility
+select = collect
+conform = integrate
+run = publish  # Alias
+
+
 def publish_all(*args, **kwargs):
     warnings.warn("pyblish.util.publish_all has been "
                   "deprecated; use publish()")
