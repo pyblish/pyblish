@@ -13,6 +13,7 @@ View {
     property bool hasError
     property string source
     property string itemType
+    property string families
 
     /*!
         Time in milliseconds taken to process
@@ -146,13 +147,6 @@ View {
                 width: parent.width
                 elide: Text.ElideLeft
             }
-
-            // Label {
-            //     text: source || ""
-            //     opacity: 0.5
-            //     width: parent.width
-            //     elide: Text.ElideLeft
-            // }
         }
 
         /*!
@@ -167,8 +161,6 @@ View {
             Repeater {
                 model: [
                     {
-                        // "icon": "check-square",
-                        // "icon": "heartbeat",
                         "icon": "slack",
                         "text": "%1/%2 passed"
                             .arg(amountPassed)

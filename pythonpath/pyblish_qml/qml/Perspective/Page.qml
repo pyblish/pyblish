@@ -91,7 +91,7 @@ Item {
 
                 Gadget {
                     title: item.label || item.name
-                    subheading: item.family || "Plug-in"
+                    subheading: item.familiesConcatenated
                     duration: item.duration
                     finishedAt: item.finishedAt
                     hasError: item.hasError

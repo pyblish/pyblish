@@ -270,6 +270,9 @@ class Controller(QtCore.QObject):
         }
 
         for plug, instance in pyblish.logic.Iterator(plugins, context):
+            if not plug.active:
+                continue
+
             state["nextOrder"] = plug.order
 
             if not self.is_running:
@@ -407,7 +410,6 @@ class Controller(QtCore.QObject):
 
         if item.optional:
             self.__toggle_item(self.item_model, source_index)
-            self.item_model.update_compatibility()
         else:
             self.error.emit("Cannot toggle")
 
@@ -424,8 +426,6 @@ class Controller(QtCore.QObject):
                     if item.isToggled != checkState:
                         self.__toggle_item(self.item_model,
                                            self.item_model.items.index(item))
-
-        self.item_model.update_compatibility()
 
     @QtCore.pyqtSlot(int, result=QtCore.QVariant)
     def pluginData(self, index):
@@ -523,6 +523,7 @@ class Controller(QtCore.QObject):
                            new_value=new_value,
                            old_value=old_value)
 
+        self.item_model.update_compatibility()
         item.isToggled = new_value
 
     def echo(self, data):
@@ -601,30 +602,29 @@ class Controller(QtCore.QObject):
         self.result_model.reset()
         self.changes.clear()
 
-        # Clear host
-        self.host.reset()
-
         def on_finished(plugins, context):
             # Compute compatibility
             for plugin in self.item_model.plugins:
-                compatible = pyblish.logic.instances_by_plugin(
-                    context, plugin)
+                if plugin.instanceEnabled:
+                    instances = pyblish.logic.instances_by_plugin(context,
+                                                                  plugin)
+                    plugin.compatibleInstances = list(i.id for i in instances)
+                else:
+                    plugin.compatibleInstances = ["Context"]
 
-                if plugin.contextEnabled and not plugin.instanceEnabled:
-                    c = type("Context", (object,), {"id": "Context"})
-                    compatible.append(c)
+            # Reorder instances in support of "cooperative collection"
+            self.item_model.beginResetModel()
 
-                plugin.compatibleInstances = [i.id for i in compatible]
-
+            items = dict()
             for instance in self.item_model.instances:
-                compatible = list()
-                for family in (instance.families or []) + [instance.family]:
-                    compatible.extend(pyblish.logic.plugins_by_families(
-                        plugins, instance.families + [instance.family]))
+                items[instance.id] = instance
+                self.item_model.items.remove(instance)
 
-                instance.compatiblePlugins = [i.id for i in compatible]
+            self.item_model.items.append(items.pop("Context"))
+            for instance in context:
+                self.item_model.items.append(items[instance.id])
 
-            self.item_model.update_compatibility()
+            self.item_model.endResetModel()
 
             # Report statistics
             stats["requestCount"] -= self.host.stats()["totalRequestCount"]
@@ -642,9 +642,11 @@ class Controller(QtCore.QObject):
 
             self.initialised.emit()
 
+            self.item_model.update_compatibility()
             self.host.emit("reset", context=context)
 
-        def on_run(plugins, context):
+        def on_run(plugins):
+            """Fetch instances in their current state, right after reset"""
             util.async(self.host.context,
                        callback=lambda context: on_finished(plugins, context))
 
@@ -664,7 +666,7 @@ class Controller(QtCore.QObject):
 
             self.run(collectors, context,
                      callback=on_run,
-                     callback_args=[plugins, context])
+                     callback_args=[plugins])
 
         def on_context(context):
             self.item_model.add_context(context)
@@ -674,7 +676,10 @@ class Controller(QtCore.QObject):
                 callback=lambda plugins: on_discover(plugins, context)
             )
 
-        util.async(self.host.context, callback=on_context)
+        def on_reset():
+            util.async(self.host.context, callback=on_context)
+
+        util.async(self.host.reset, callback=on_reset)
 
     @QtCore.pyqtSlot()
     def publish(self):
@@ -803,8 +808,9 @@ class Controller(QtCore.QObject):
             util.async(self.host.context, callback=update_context)
 
         def update_context(ctx):
+            instances = [i.id for i in self.item_model.instances]
             for instance in ctx:
-                if instance.id in [i.id for i in self.item_model.instances]:
+                if instance.id in instances:
                     continue
 
                 context.append(instance)
@@ -838,6 +844,12 @@ class Controller(QtCore.QObject):
 
     @QtCore.pyqtSlot(int)
     def repairPlugin(self, index):
+        """
+
+        DEPRECATED: REMOVE ME
+
+        """
+
         if "finished" not in self.states:
             self.error.emit("Not ready")
             return

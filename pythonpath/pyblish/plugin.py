@@ -29,6 +29,7 @@ from . import (
     _registered_plugins,
     _registered_hosts,
     _registered_paths,
+    _registered_targets,
 )
 
 from . import lib
@@ -135,7 +136,7 @@ def evaluate_enabledness(plugin):
     if "context" in args_:
         plugin.__contextEnabled__ = True
 
-    # Forwards-compatibility with asset
+    # Backwards-compatibility with asset
     if "asset" in args_:
         plugin.__instanceEnabled__ = True
 
@@ -283,7 +284,25 @@ ExtractorOrder = 2
 IntegratorOrder = 3
 
 
+def validate_argument_signature(plugin):
+    """Ensure plug-in processes either 'instance' or 'context'"""
+    if not any(arg in inspect.getargspec(plugin.process).args
+               for arg in ("instance", "context")):
+        plugin.__invalidSignature__ = True
+
+
+class ExplicitMetaPlugin(MetaPlugin):
+    """Validate explicit plug-ins"""
+
+    def __init__(cls, *args, **kwargs):
+        validate_argument_signature(cls)
+        return super(ExplicitMetaPlugin, cls).__init__(*args, **kwargs)
+
+
 class ContextPlugin(Plugin):
+
+    __metaclass__ = ExplicitMetaPlugin
+
     def process(self, context):
         """Primary processing method
 
@@ -294,6 +313,9 @@ class ContextPlugin(Plugin):
 
 
 class InstancePlugin(Plugin):
+
+    __metaclass__ = ExplicitMetaPlugin
+
     def process(self, instance):
         """Primary processing method
 
@@ -771,7 +793,7 @@ def current_host():
 
     """
 
-    return _registered_hosts[-1] or "unknown"
+    return _registered_hosts[-1] if _registered_hosts else "unknown"
 
 
 def register_callback(signal, callback):
@@ -1019,6 +1041,58 @@ def registered_hosts():
     return list(_registered_hosts)
 
 
+def current_target():
+    return _registered_targets[-1] if _registered_targets else ""
+
+
+def register_target(target):
+    """Register a new target
+
+    Registered targets can be used in plug-ins to determin outputs
+
+    Example:
+        >>> register_target("Studio")
+        >>> "Studio" in registered_targets()
+        True
+        >>> current_target()
+        'Studio'
+
+    """
+
+    if target in _registered_targets:
+        idx = _registered_targets.index(target)
+        _registered_targets.pop(idx)
+
+    _registered_targets.append(target)
+
+
+def deregister_target(target, quiet=False):
+    """Remove an already registered target
+
+    Arguments:
+        target (str): Name of target
+        quiet (bool): Whether to raise an exception
+            when attempting to remove a target that is
+            not already registered.
+
+    """
+
+    try:
+        _registered_targets.remove(target)
+    except Exception as e:
+        if not quiet:
+            raise e
+
+
+def deregister_all_targets():
+    _registered_targets[:] = []
+
+
+def registered_targets():
+    """Return the currently registered targets"""
+    return list(_registered_targets)
+
+
 def environment_paths():
     """Return paths added via environment variable"""
 
@@ -1222,6 +1296,10 @@ def plugin_is_valid(plugin):
         if not isinstance(host, basestring):
             log.debug("Hosts must be string")
             return False
+
+    if hasattr(plugin, "__invalidSignature__"):
+        log.debug("Invalid signature")
+        return False
 
     return True
 

@@ -113,12 +113,6 @@ def format_error(error):
 def format_data(data):
     """Serialise instance/context data
 
-    Given an arbitrary dictionary of Python object,
-    return a JSON-compatible dictionary.
-
-    Note that all keys are cast to string and that values
-    not compatible with JSON are replaced with "Not supported".
-
     Arguments:
         data (dict): Data to serialise
 
@@ -127,22 +121,16 @@ def format_data(data):
 
     """
 
-    formatted = dict()
-
-    for key, value in data.iteritems():
-        try:
-            key = str(key)
-        except:
-            continue
-
-        try:
-            json.dumps(value)
-        except:
-            value = "Not supported"
-
-        formatted[key] = value
-
-    return formatted
+    # These are the only data members
+    # accessible from the client
+    return dict((key, data[key]) for key in (
+        "name",
+        "label",
+        "family",
+        "families",
+        "publish",
+        ) if key in data
+    )
 
 
 def format_instance(instance):

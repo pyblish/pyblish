@@ -14,26 +14,26 @@ import tempfile
 import zipfile
 
 
-def download_repos(root, repos):
+def download(repos):
     """Download provided repos from GitHub
 
     Arguments:
-        root (str): Destination directory for downloaded files
         repos (iter): Names of repos to download
 
     Returns:
         list: Absolute paths to downloaded repos
 
     Example:
-        >>> dirs = download_repos(
+        >>> dirs = download(
         ...   "c:\tempdir", ["pyblish-base", "pyblish-qml"])
 
     """
 
+    tempdir = tempfile.mkdtemp()
     dirnames = list()
     for package in repos:
         url = "https://github.com/pyblish/%s/archive/master.zip" % package
-        dst = os.path.join(root, package)
+        dst = os.path.join(tempdir, package)
 
         try:
             print("Downloading %s.." % url)
@@ -49,16 +49,16 @@ def download_repos(root, repos):
     return dirnames
 
 
-def generate_filelist(*packages):
-    """Scan PYTHONPATH for package in `packages` and yield list of files.
+def collect(modules):
+    """Scan PYTHONPATH for package in `modules` and yield list of files.
 
     Arguments:
-        packages (iter): Names of packages to include, e.g. ["pyblish_qml"]
+        modules (iter): Names of modules to include, e.g. ["pyblish_qml"]
 
     """
 
-    for package in packages:
-        _, dirname, _ = imp.find_module(package)
+    for module in modules:
+        _, dirname, _ = imp.find_module(module)
 
         exclude = (".pyc",)
         for base, dirs, files in os.walk(dirname):
@@ -67,18 +67,18 @@ def generate_filelist(*packages):
                 if ext in exclude:
                     continue
 
-                # Output package/file.ext
+                # Output module/file.ext
                 src = os.path.join(base, fname)
                 dst = os.path.relpath(os.path.join(base, fname),
                                       os.path.dirname(dirname))
                 yield src, dst
 
 
-def build(root, repos, clean=False):
+def bundle(root, repos, clean=False):
     """Build distribution at `root` of `repos`
 
     Arguments:
-        root (str): Directory into which to build distribution.
+        root (str): Directory into which to bundle distribution.
         repos (list): Packages to include
         clean (bool): Should `root` be erased before continuing?
 
@@ -102,7 +102,7 @@ def build(root, repos, clean=False):
                 sys.stderr.write(
                     "ERROR: Could not clean \"%s\", retrying..\n" % root)
 
-    for dirname in download_repos(root=tempdir, repos=repos):
+    for dirname in download(repos=repos):
         sys.path.insert(0, dirname)
 
     modules = [package.replace("-", "_") for package in repos]
@@ -115,7 +115,7 @@ def build(root, repos, clean=False):
     except ValueError:
         pass
 
-    for src, dst in generate_filelist(*modules):
+    for src, dst in collect(modules):
         abspath = os.path.join(root, dst)
         dirname = os.path.dirname(abspath)
 
@@ -126,6 +126,16 @@ def build(root, repos, clean=False):
 
         print("Writing \"%s\"" % abspath)
         shutil.copyfile(src, abspath)
+
+    with open(os.path.join(root, "README.md"), "w") as f:
+        f.write("""This directory is automatically built from contained Git repositories.
+
+To modify and/or contribute changes, see the original project pages, such as..
+
+- https://github.com/pyblish/pyblish-base
+- https://github.com/pyblish/pyblish-rpc
+- https://github.com/pyblish/pyblish-qml
+""")
 
     print("Done")
 
@@ -138,13 +148,11 @@ if __name__ == '__main__':
     parser.add_argument("--clean", action="store_true")
 
     args = parser.parse_args()
-
-    tempdir = tempfile.mkdtemp()
     repos = args.repos.split()
 
     print("Building %s @ \"%s\", clean=%s" % (
         repos, args.root, args.clean))
 
-    build(root=args.root,
-          repos=repos,
-          clean=args.clean)
+    bundle(root=args.root,
+           repos=repos,
+           clean=args.clean)

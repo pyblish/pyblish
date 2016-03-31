@@ -10,6 +10,8 @@ item_defaults = {
     "id": "default",
     "name": "default",
     "isProcessing": False,
+    "families": list(),
+    "familiesConcatenated": "",
     "isToggled": True,
     "optional": True,
     "hasError": False,
@@ -28,7 +30,6 @@ plugin_defaults = {
     "order": None,
     "hasRepair": False,
     "hasCompatible": False,
-    "families": list(),
     "hosts": list(),
     "type": "unknown",
     "module": "unknown",
@@ -45,7 +46,6 @@ plugin_defaults = {
 instance_defaults = {
     "optional": True,
     "family": None,
-    "families": list(),
     "niceName": "default",
     "compatiblePlugins": list(),
 }
@@ -306,6 +306,9 @@ class ItemModel(AbstractModel):
                        "path"]:
             item[member] = plugin[member]
 
+        # Visualised in Perspective
+        item["familiesConcatenated"] = ", ".join(plugin["families"])
+
         # converting links to HTML
         pattern = r"(https?:\/\/(?:w{1,3}.)?[^\s]*?(?:\.[a-z]+)+)"
         pattern += r"(?![^<]*?(?:<\/\w+>|\/?>))"
@@ -316,6 +319,7 @@ class ItemModel(AbstractModel):
         # Append GUI-only data
         item["itemType"] = "plugin"
         item["hasCompatible"] = True
+        item["isToggled"] = plugin.get("active", True)
         item["verb"] = {
             "Selector": "Collect",
             "Collector": "Collect",
@@ -341,6 +345,11 @@ class ItemModel(AbstractModel):
         item["itemType"] = "instance"
         item["isToggled"] = instance.data.get("publish", True)
         item["hasCompatible"] = True
+
+        # Visualised in Perspective
+        item["familiesConcatenated"] = instance.data.get("family", "")
+        item["familiesConcatenated"] += ", ".join(
+            instance.data.get("families", []))
 
         item = self.add_item(item)
         self.instances.append(item)
@@ -379,12 +388,19 @@ class ItemModel(AbstractModel):
         for type in ("instance", "plugin"):
             id = (result[type] or {}).get("id")
 
-            if not id:
-                # A id is not provided in cases where
-                # the Context has been processed.
+            is_context = not id
+            if is_context:
                 item = self.instances[0]
             else:
                 item = self.items.get(id)
+
+            if item is None:
+                # If an item isn't there yet
+                # no worries. It's probably because
+                # reset is still running and the
+                # item in question is a new instance
+                # not yet added to the model.
+                continue
 
             item.isProcessing = False
             item.currentProgress = 1

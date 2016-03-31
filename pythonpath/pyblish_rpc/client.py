@@ -19,7 +19,7 @@ try:
     import xmlrpclib
 except ImportError:
     # Python 3
-    import xmlrpc.server as xmlrpclib    
+    import xmlrpc.server as xmlrpclib
 
 
 import pyblish.api
