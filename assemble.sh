@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export repos=pyblish-base \
+export repos="pyblish-base \
              pyblish-hiero \
              pyblish-houdini \
              pyblish-integration \
@@ -8,5 +8,5 @@ export repos=pyblish-base \
              pyblish-qml \
              pyblish-rpc \
              pyblish-standalone \
-             pyblish-tray
-python dist.py $(pwd)\pythonpath "$repos" --clean
+             pyblish-tray"
+python dist.py $(pwd)/pythonpath "$repos" --clean
