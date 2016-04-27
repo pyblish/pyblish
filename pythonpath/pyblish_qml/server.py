@@ -51,7 +51,13 @@ class QmlApi(object):
     def heartbeat(self, port):
         """Tell QML that someone is listening at `port`"""
         self.app.register_heartbeat(port)
-
+        
+    def ping(self):
+        """Used to check connectivity"""
+        return {
+            "message": "Hello, whomever you are"
+        }
+        
     def find_available_port(self, start=first_port):
         """Return the next available port at which a client may listen
 
