@@ -20,6 +20,8 @@ def cli():
     parser.add_argument("--path", action="append",
                         help=("Append path to PYBLISHPLUGINPATH, "
                               "can be called multiple times"))
+    parser.add_argument("-rh", "--register-host", action="append",
+                        help=("Append hosts to register."))
 
     kwargs = parser.parse_args(sys.argv[1:])
 
@@ -34,7 +36,10 @@ def cli():
 
     os.environ["PYBLISHPLUGINPATH"] = os.pathsep.join(pyblish_path)
 
-    executable.start()
+    hosts = kwargs.__dict__["register_host"]
+    if not hosts:
+        hosts = []
+    executable.start(hosts=hosts)
 
 
 if __name__ == "__main__":

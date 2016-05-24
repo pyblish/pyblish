@@ -18,6 +18,7 @@ ProgressBar 0.1 ProgressBar.qml
 SpinBox 0.1 SpinBox.qml
 Spacer 0.1 Spacer.qml
 Scrollbar 0.1 Scrollbar.qml
+ScrollHint 0.1 ScrollHint.qml
 View 0.1 View.qml
 TabBar 0.1 TabBar.qml
 TabView 0.1 TabView.qml

@@ -86,8 +86,8 @@ class RpcService(object):
 
         """
 
-        plugin_obj = self._plugin_from_name(plugin["name"])
-        instance_obj = (self.__instances[instance["name"]]
+        plugin_obj = self.__plugins[plugin["id"]]
+        instance_obj = (self.__instances[instance["id"]]
                         if instance is not None else None)
 
         result = pyblish.plugin.process(
@@ -99,8 +99,8 @@ class RpcService(object):
         return formatting.format_result(result)
 
     def repair(self, plugin, instance=None):
-        plugin_obj = self._plugin_from_name(plugin["name"])
-        instance_obj = (self.__instances[instance["name"]]
+        plugin_obj = self.__plugins[plugin["id"]]
+        instance_obj = (self.__instances[instance["id"]]
                         if instance is not None else None)
 
         result = pyblish.plugin.repair(
@@ -120,11 +120,6 @@ class RpcService(object):
         except Exception as e:
             traceback.print_exc()
             raise e
-
-    def _plugin_from_name(self, name):
-        """Parse plug-in id to object"""
-        plugins = pyblish.lib.ItemList("__name__", self._plugins)
-        return plugins[name]
 
     def emit(self, signal, kwargs):
         """Trigger registered callbacks
@@ -150,7 +145,6 @@ class RpcService(object):
 class MockRpcService(RpcService):
     def __init__(self, delay=0.01, *args, **kwargs):
         super(MockRpcService, self).__init__(*args, **kwargs)
-
         self.delay = delay
 
     def discover(self):
@@ -158,15 +152,9 @@ class MockRpcService(RpcService):
 
     def reset(self):
         self._context = pyblish.api.Context()
-        self._plugins = mocking.plugins
+        self._plugins = pyblish.lib.ItemList("id", mocking.plugins)
         self._provider = pyblish.plugin.Provider()
 
     def process(self, *args, **kwargs):
         time.sleep(self.delay)
         return super(MockRpcService, self).process(*args, **kwargs)
-
-    @classmethod
-    def _plugin_from_name(cls, name):
-        """Parse plug-in id to object"""
-        plugins = pyblish.lib.ItemList("__name__", mocking.plugins)
-        return plugins[name]

@@ -23,6 +23,7 @@ BaseListItem {
         CheckBox {
             id: indicator
             active: listItem.active
+            opacity: active ? 1.0 : 0.5
             checked: listItem.checked
             anchors.verticalCenter: parent.verticalCenter
 

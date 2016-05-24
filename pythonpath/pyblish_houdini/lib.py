@@ -41,6 +41,7 @@ def setup(console=False, port=None):
 
 def register_host():
     """Register supported hosts"""
+    pyblish.api.register_host("hython")
     pyblish.api.register_host("hpython")
     pyblish.api.register_host("houdini")
 

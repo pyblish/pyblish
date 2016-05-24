@@ -94,6 +94,6 @@ Object {
     FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-Light.ttf")}
     FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-LightItalic.ttf")}
     FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-Regular.ttf")}
-    FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-SemiBold.ttf")}
-    FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-SemiBoldItalic.ttf")}
+    FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-Semibold.ttf")}
+    FontLoader {source: Qt.resolvedUrl("fonts/opensans/OpenSans-SemiboldItalic.ttf")}
 }

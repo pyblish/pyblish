@@ -23,16 +23,16 @@ MouseArea {
 
     onStatusChanged: glow.opacity = 1
 
-    Rectangle {
-        id: rectangle
+    AwesomeIcon {
+        id: check
 
-        width: Math.min(parent.width, parent.height)
-        height: width
+        name: "check"
+        size: 8
 
         anchors.centerIn: parent
 
         color: statuses[status]
-        opacity: checkView.checked ? 1 : 0
+        opacity: checkView.checked ? checkView.active ? 1 : 0.5 : 0
 
         Behavior on opacity {
             NumberAnimation {
@@ -51,13 +51,15 @@ MouseArea {
     Rectangle {
         id: glow
 
+        opacity: checkView.active ? 1 : 0.5
+
         width: Math.min(parent.width, parent.height)
         height: width
 
         anchors.centerIn: parent
 
         color: "transparent"
-        border.color: rectangle.color
+        border.color: check.color
         border.width: 1
     }
 }

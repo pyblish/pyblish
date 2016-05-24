@@ -8,7 +8,6 @@ import threading
 
 # Dependencies
 from PyQt5 import QtCore, QtGui, QtQuick, QtTest
-import pyblish.api
 
 # Local libraries
 from . import util, compat, server, control

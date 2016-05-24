@@ -5,10 +5,13 @@ import pyblish.api
 import pyblish_integration.lib
 
 
-def start():
+def start(hosts=[]):
     """Start Pyblish QML"""
 
     pyblish.api.register_host("standalone")
+    for host in hosts:
+        pyblish.api.register_host(host)
+
     pyblish_integration.setup()
 
     max_tries = 5

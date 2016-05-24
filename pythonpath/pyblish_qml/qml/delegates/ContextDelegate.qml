@@ -20,7 +20,7 @@ BaseDelegate {
             spacing: 2
 
             Label {
-                text: object.name + " " + object.pyblishServerVersion
+                text: "pyblish-base " + object.pyblishServerVersion
                 style: "title"
                 elide: Text.ElideRight
             }
@@ -30,6 +30,14 @@ BaseDelegate {
                 {
                     "key": "Python",
                     "value": object.pythonVersion.split(" ")[0]
+                },
+                {
+                    "key": "pyblish-rpc",
+                    "value": object.pyblishRPCVersion
+                },
+                {
+                    "key": "pyblish-qml",
+                    "value": object.pyblishQmlVersion
                 },
                 {
                     "key": "Port",
@@ -44,12 +52,8 @@ BaseDelegate {
                     "value": object.host
                 },
                 {
-                    "key": "RPC version",
-                    "value": object.pyblishRPCVersion
-                },
-                {
                     "key": "Connected",
-                    "value": object.connectTime
+                    "value": Date(Date.parse(object.connectTime))
                 }]
 
                 Row {

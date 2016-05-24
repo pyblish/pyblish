@@ -57,10 +57,22 @@ ListView {
             },
 
             Action {
+                name: "actionIcon"
+                iconName: "adn"
+                iconSize: 12
+                tooltip: "This plug-in has actions"
+                enabled: object.actionsIconVisible ? true : false
+                color: object.actionPending ? "white"
+                     : object.actionHasError ? Theme.dark.errorColor
+                     : Theme.dark.successColor
+            },
+
+            Action {
                 name: "enter"
                 iconName: "angle-right"
                 onTriggered: actionTriggered(this, index)
             }
         ]
+
     }
 }

@@ -40,6 +40,9 @@ StackView {
     }
 
     initialItem: Overview {
+        width: stack.width
+        height: stack.height
+
         onInstanceEntered: setup(app.instanceProxy.item(index))
         onPluginEntered: setup(app.pluginProxy.item(index))
     }

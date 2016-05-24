@@ -7,6 +7,7 @@ Ink {
     property Action action
 
     property int elevation
+    property color color: "white"
 
     property string name: action ? action.iconName : ""
     property int size: 14
@@ -34,6 +35,7 @@ Ink {
         AwesomeIcon {
             id: icon
             name: button.name
+            color: button.color
 
             anchors.centerIn: parent
 
