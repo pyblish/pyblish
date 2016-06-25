@@ -2,43 +2,58 @@
 
 [![title](https://cloud.githubusercontent.com/assets/2152766/12704096/b74e8778-c84a-11e5-94f6-adc0c3c50447.png)](https://www.youtube.com/watch?v=j5uUTW702-U)
 
-Test-driven content creation for collaborative, creative projects.
+### Pyblish
 
-This project contains a fixed set of sub-projects at a particular version, these are the currently supported combination of versions. This project is then packaged and distributed in other projects, such as [pyblish-win](https://github.com/pyblish/pyblish-win).
+This project contains a known working combination of supported projects.
 
-- [More information](../../wiki)
-- [Tutorial](https://pyblish.gitbooks.io/pyblish-by-example/content/index.html)
-- [Installation](../../wiki/installation)
-- [Chatroom](https://gitter.im/pyblish/pyblish)
+- [Learn](http://learn.pyblish.com)
+- [Chat](https://gitter.im/pyblish/pyblish)
+- [Wiki](../../wiki)
 
 [gitter-image]: https://badges.gitter.im/Join%20Chat.svg
 
+You may also be interested in..
+
+- [pyblish-base](https://github.com/pyblish/pyblish-base) Foundation library
+- [pyblish-maya](https://github.com/pyblish/pyblish-maya) Autodesk Maya integration
+- [pyblish-qml](https://github.com/pyblish/pyblish-qml) Graphical user interface
+
+<br>
+<br>
+<br>
+
+### Installation
+
+Pyblish is available for Windows, Linux and MacOS, Python 2 and 3 via PyPI.
+
 ```bash
-# Relationship graph
-
-                                  +----------------+
-                                  |                |
-                                  |  pyblish-win   | inherits 1.3.1
-                                  |                | from pyblish
-                                  +----------------+
-                                          |
-                                          |
-                                          |
-                                          |
-                                  +-------v--------+
-                                  |                |
-             +--------------------+     pyblish    +------------------------+
-             |                 +--+                +---+                    |
-             |                 |  +----------------+   |                    |
-             |                 |        1.3.1          |                    |
-             |                 |                       |                    |
-             |                 |                       |                    |
-             |                 |                       |                    |
-    +--------v-------+   +-----v----------+   +--------v-------+   +--------v-------+
-    |                |   |                |   |                |   |                |
-    |  pyblish-base  |   |  pyblish-qml   |   |  pyblish-rpc   |   |  pyblish-maya  |
-    |                |   |                |   |                |   |                |
-    +----------------+   +----------------+   +----------------+   +----------------+
-          1.3.0                 0.4.0                0.2.0                1.2.0
-
+$ pip install pyblish
 ```
+
+**Contents**
+
+The PyPI package will install the latest known working combination of Pyblish projects, see [requirements.txt](../../blob/master/requirements.txt) for details.
+
+<br>
+<br>
+<br>
+
+### Usage
+
+Once installed, you will find a number of new Python packages available, most prominently `pyblish.api`
+
+```python
+import pyblish.api
+pyblish.api.discover()
+```
+
+See the README of each individual project for details, here are a few.
+
+- [pyblish-base](https://github.com/pyblish/pyblish-base)
+- [pyblish-qml](https://github.com/pyblish/pyblish-qml)
+- [pyblish-lite](https://github.com/pyblish/pyblish-lite)
+- [pyblish-standalone](https://github.com/pyblish/pyblish-standalone)
+- [pyblish-maya](https://github.com/pyblish/pyblish-maya)
+- [pyblish-houdini](https://github.com/pyblish/pyblish-houdini)
+- [pyblish-nuke](https://github.com/pyblish/pyblish-nuke)
+- [pyblish-hiero](https://github.com/pyblish/pyblish-hiero)

@@ -1,5 +1,0 @@
-image:
-- mottosso/maya
-
-script:
-- hpython run_testsuite.py

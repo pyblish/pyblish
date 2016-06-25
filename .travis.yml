@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 2.7
+
+script:
+  # Test setup.py
+  - pip install file://$(pwd)
+
+deploy:
+  provider: pypi
+  user: mottosso
+  password:
+    secure: pSUCNg5n0NsmPaJPT+BcYJnnItXXwR52cPAC2E6FEVLzKf7cCdln+bpdv5v11yh9ub8FBmAjRP24eZ2Dx7QD7Cia3S33YuZpiorijD1FUB5AOdn8TFc2uEQgfhKkCHXFJbSy7DchHePw2OV7FE5+TmAx0MZvQ7ajLiriKegwvJQ=
+  on:
+    tags: true
+    repo: pyblish/pyblish
