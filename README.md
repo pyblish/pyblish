@@ -37,7 +37,7 @@ $ pip install pyblish
 
 **Contents**
 
-The PyPI package will install the latest known working combination of Pyblish projects, see [requirements.txt](../../blob/master/requirements.txt) for details.
+The PyPI package will install the latest known working combination of Pyblish projects, see [setup.py](../../blob/master/setup.py) for details.
 
 <br>
 <br>
