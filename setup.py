@@ -1,11 +1,5 @@
 from setuptools import setup, find_packages
 
-with open("README.md") as f:
-    readme = f.read()
-
-with open("VERSION") as f:
-    version = f.read()
-
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -28,7 +22,7 @@ classifiers = [
 
 setup(
     name="pyblish",
-    version=version,
+    version="1.4.2",
     description="Plug-in driven automation framework for content",
     long_description="Collection of latest supported "
                      "combinations of Pyblish projects",
