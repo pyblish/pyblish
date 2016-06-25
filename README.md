@@ -1,8 +1,13 @@
 [![title](https://cloud.githubusercontent.com/assets/2152766/12704096/b74e8778-c84a-11e5-94f6-adc0c3c50447.png)](https://www.youtube.com/watch?v=j5uUTW702-U)
 
-[![Build Status](https://travis-ci.org/pyblish/pyblish.svg?branch=master)](https://travis-ci.org/pyblish/pyblish) [![](https://img.shields.io/badge/goto-development%20project-yellowgreen.svg)](https://github.com/pyblish/pyblish-base) [![Gitter][gitter-image]](https://gitter.im/pyblish/pyblish)
+[![PyPI version][pypi-image]][pypi-link] [![Build Status](https://travis-ci.org/pyblish/pyblish.svg?branch=master)](https://travis-ci.org/pyblish/pyblish)  [![Gitter][gitter-image]](https://gitter.im/pyblish/pyblish)
 
 ### Pyblish
+
+[pypi-image]: https://badge.fury.io/py/pyblish.svg
+[pypi-link]: http://badge.fury.io/py/pyblish
+[travis-image]: https://travis-ci.org/pyblish/pyblish-base.svg?branch=master
+[travis-link]: https://travis-ci.org/pyblish/pyblish-base
 
 This project contains a known working combination of supported projects.
 
