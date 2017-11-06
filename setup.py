@@ -37,14 +37,14 @@ setup(
         "console_scripts": ["pyblish = pyblish.cli:main"]
     },
     install_requires=[
-        "pyblish-base==1.4.3",
+        "pyblish-base==1.5.4",
         # "pyblish-hiero==1.0.0",  # Awaiting upload to PyPI
-        # "pyblish-houdini==0.2.2",
+        "pyblish-houdini==1.0.0",
         "pyblish-maya==2.1.2",
-        # "pyblish-nuke==1.1.2",
-        "pyblish-modo==0.0.2",
-        "pyblish-lite==0.6.4",
-        "pyblish-qml==0.7.0",
+        "pyblish-nuke==2.0.3",
+        # "pyblish-modo==0.0.2",
+        "pyblish-lite==0.7.4",
+        "pyblish-qml==1.4.5",
         # pyblish-standalone==0.1.0,
     ],
 )
