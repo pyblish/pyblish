@@ -44,7 +44,7 @@ setup(
         "pyblish-nuke==2.1.2",
         # "pyblish-modo==0.0.2",
         "pyblish-lite==0.8.3",
-        "pyblish-qml==1.8.2",
+        "pyblish-qml==1.8.3",
         # pyblish-standalone==0.1.0,
     ],
 )
