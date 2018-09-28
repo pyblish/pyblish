@@ -10,6 +10,7 @@ script:
 deploy:
   provider: pypi
   user: mottosso
+  distributions: "sdist bdist_wheel"
   password:
     secure: pSUCNg5n0NsmPaJPT+BcYJnnItXXwR52cPAC2E6FEVLzKf7cCdln+bpdv5v11yh9ub8FBmAjRP24eZ2Dx7QD7Cia3S33YuZpiorijD1FUB5AOdn8TFc2uEQgfhKkCHXFJbSy7DchHePw2OV7FE5+TmAx0MZvQ7ajLiriKegwvJQ=
   on:
