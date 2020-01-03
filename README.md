@@ -9,7 +9,7 @@
 [travis-image]: https://travis-ci.org/pyblish/pyblish-base.svg?branch=master
 [travis-link]: https://travis-ci.org/pyblish/pyblish-base
 
-This project contains a known working combination of supported projects.
+This project contains a known (but possibly old!) working combination of supported projects. See each corresponding project for latest up to date information, along with our forum and chat room below.
 
 - [Learn](http://learn.pyblish.com)
 - [Chat](https://gitter.im/pyblish/pyblish)
