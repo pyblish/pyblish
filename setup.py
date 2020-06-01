@@ -33,9 +33,6 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     classifiers=classifiers,
-    entry_points={
-        "console_scripts": ["pyblish = pyblish.cli:main"]
-    },
     install_requires=[
         "pyblish-base==1.7.2",
         # "pyblish-hiero==1.0.0",  # Awaiting upload to PyPI
