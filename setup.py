@@ -22,7 +22,7 @@ classifiers = [
 
 setup(
     name="pyblish",
-    version="1.6.0",
+    version="1.6.1",
     description="Plug-in driven automation framework for content",
     long_description="Collection of latest supported "
                      "combinations of Pyblish projects",
