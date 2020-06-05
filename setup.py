@@ -22,7 +22,7 @@ classifiers = [
 
 setup(
     name="pyblish",
-    version="1.6.1",
+    version="1.7.0",
     description="Plug-in driven automation framework for content",
     long_description="Collection of latest supported "
                      "combinations of Pyblish projects",
@@ -34,14 +34,11 @@ setup(
     zip_safe=False,
     classifiers=classifiers,
     install_requires=[
-        "pyblish-base==1.7.2",
-        # "pyblish-hiero==1.0.0",  # Awaiting upload to PyPI
+        "pyblish-base==1.8.7",
         "pyblish-houdini==1.0.1",
         "pyblish-maya==2.1.7",
         "pyblish-nuke==2.1.2",
-        # "pyblish-modo==0.0.2",
-        "pyblish-lite==0.8.3",
-        "pyblish-qml==1.8.5",
-        # pyblish-standalone==0.1.0,
+        "pyblish-lite==0.8.5",
+        "pyblish-qml==1.11.4",
     ],
 )
